@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование отелей</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function redirectRandomly() {
+            // Список страниц для перенаправления
+            const pages = [
+                "./roomsA.html", // Замените на URL первой страницы
+                "./roomsB.html"  // Замените на URL второй страницы
+            ];
+
+            // Генерация случайного индекса (0 или 1)
+            const randomIndex = Math.floor(Math.random() * pages.length);
+
+            // Перенаправление на случайную страницу
+            window.location.href = pages[randomIndex];
+        }
+    </script>
+</head>
+<body class="bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('./rooms/14.jpeg');">
+    <div class="max-w-3xl w-full p-8 bg-white bg-opacity-80 shadow-xl rounded-2xl text-center backdrop-blur-md">
+        <h1 class="text-4xl font-extrabold text-gray-900">Забронируйте идеальный отель</h1>
+        <p class="text-gray-700 mt-4 text-lg">Лучшие предложения и уникальные варианты размещения для вашего отдыха.</p>
+        
+        <div class="mt-6">
+            <img src="./rooms/16.jpeg" alt="Отель" class="w-full rounded-lg shadow-md">
+        </div>
+
+        <div class="mt-6">
+            <button onclick="redirectRandomly()" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-3 rounded-lg shadow-lg text-lg font-semibold hover:scale-105 transition-transform">
+                Посмотреть отели
+            </button>
+        </div>
+    </div>
+</body>
+</html>
