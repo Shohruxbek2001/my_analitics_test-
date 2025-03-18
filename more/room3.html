@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocean Breeze Resort - Подробная информация</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+     
+        ym(100430606, "init", {
+             clickmap:true,
+             trackLinks:true,
+             accurateTrackBounce:true,
+             webvisor:true
+        });
+     </script>
+     <noscript><div><img src="https://mc.yandex.ru/watch/100430606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+     <script>
+        // Функция для получения параметра из URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        // Получаем значение параметра "source"
+        const source = getQueryParam('source');
+    
+        if (source) {
+            // Отправляем событие в Яндекс.Метрику
+            ym(100430606, 'reachGoal', 'finalPageVisit', { source: source });
+        }
+    </script>
 </head>
 <body class="bg-gray-100">
     <!-- Шапка -->
@@ -45,7 +75,7 @@
                     <span class="ml-2 text-sm text-gray-500">/ за ночь</span>
                 </div>
             </div>
-            <button class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition w-full md:w-auto">
+            <button id="otherButton" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition w-full md:w-auto">
                 Забронировать сейчас
             </button>
         </div>
@@ -57,5 +87,24 @@
             <p>&copy; 2025 Ocean Breeze Resort. Все права защищены.</p>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('otherButton').addEventListener('click', function() {
+            // Получаем время нажатия на главной странице
+            const clickTime = localStorage.getItem('buttonClickTime');
+    
+            if (clickTime) {
+                // Вычисляем разницу во времени
+                const currentTime = new Date().getTime();
+                const timeDifference = currentTime - parseInt(clickTime);
+    
+                // Отправляем событие в Яндекс.Метрику
+                ym(100430606, 'reachGoal', 'otherButtonClick', { timeSpent: timeDifference });
+    
+                // Очищаем localStorage
+                localStorage.removeItem('buttonClickTime');
+            }
+        });
+    </script>
 </body>
 </html>
