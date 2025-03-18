@@ -107,7 +107,8 @@
                 console.log('Кнопка нажата, отправляем событие в Яндекс.Метрику');
     
                 // Отправляем событие в Яндекс.Метрику
-                ym(100430606, 'reachGoal', 'otherButtonClick', { timeSpent: timeDifference });
+                ym(100430606, 'params', { timeSpent: timeDifference });
+                ym(100430606, 'reachGoal', 'otherButtonClick');
     
                 // Очищаем localStorage
                 localStorage.removeItem('buttonClickTime');
