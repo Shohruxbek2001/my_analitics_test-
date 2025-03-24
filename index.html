@@ -9,7 +9,7 @@
         
      <noscript><div><img src="https://mc.yandex.ru/watch/100430606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <script>
-        function getNextVersion() {
+     function getNextVersion() {
     const pages = ["./roomsA.html", "./roomsB.html"];
     
     // Проверяем, есть ли уже сохраненная версия в localStorage
@@ -19,16 +19,16 @@
         return;
     }
     
-    // Получаем последнее значение чередования из sessionStorage
-    let lastVersion = sessionStorage.getItem("lastVersion") || "B";
-    let nextVersion = lastVersion === "A" ? "B" : "A";
+    // Получаем количество пользователей, зашедших на страницу
+    let userCount = parseInt(localStorage.getItem("userCount") || "0", 10);
+    let nextVersion = userCount % 2 === 0 ? pages[0] : pages[1];
     
-    // Сохраняем новую версию в localStorage и sessionStorage
-    localStorage.setItem("userVersion", `./rooms${nextVersion}.html`);
-    sessionStorage.setItem("lastVersion", nextVersion);
+    // Сохраняем версию для пользователя и увеличиваем счетчик
+    localStorage.setItem("userVersion", nextVersion);
+    localStorage.setItem("userCount", (userCount + 1).toString());
     
     // Перенаправляем пользователя
-    window.location.href = `./rooms${nextVersion}.html`;
+    window.location.href = nextVersion;
 }
     </script>
 </head>
