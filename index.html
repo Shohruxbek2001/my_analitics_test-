@@ -9,27 +9,28 @@
         
      <noscript><div><img src="https://mc.yandex.ru/watch/100430606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <script>
-     function getNextVersion() {
-    const pages = ["./roomsA.html", "./roomsB.html"];
-    
-    // Проверяем, есть ли уже сохраненная версия в localStorage
-    const savedVersion = localStorage.getItem("userVersion");
-    if (savedVersion) {
-        window.location.href = savedVersion;
-        return;
+    function getNextVersion() {
+        const pages = ["./roomsA.html", "./roomsB.html"];
+        
+        // Проверяем, есть ли уже сохраненная версия в localStorage
+        const savedVersion = localStorage.getItem("userVersion");
+        if (savedVersion) {
+            window.location.href = savedVersion;
+            return;
+        }
+        
+        // Получаем последнюю версию из sessionStorage (глобальное чередование)
+        let lastVersion = sessionStorage.getItem("lastVersion") || "B";
+        let nextVersion = lastVersion === "A" ? "B" : "A";
+        
+        // Сохраняем выбор для пользователя и обновляем глобальный флаг
+        let chosenPage = `./rooms${nextVersion}.html`;
+        localStorage.setItem("userVersion", chosenPage);
+        sessionStorage.setItem("lastVersion", nextVersion);
+        
+        // Перенаправляем пользователя
+        window.location.href = chosenPage;
     }
-    
-    // Получаем количество пользователей, зашедших на страницу
-    let userCount = parseInt(localStorage.getItem("userCount") || "0", 10);
-    let nextVersion = userCount % 2 === 0 ? pages[0] : pages[1];
-    
-    // Сохраняем версию для пользователя и увеличиваем счетчик
-    localStorage.setItem("userVersion", nextVersion);
-    localStorage.setItem("userCount", (userCount + 1).toString());
-    
-    // Перенаправляем пользователя
-    window.location.href = nextVersion;
-}
     </script>
 </head>
 <body class="bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('./rooms/14.jpeg');">
