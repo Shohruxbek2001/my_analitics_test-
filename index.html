@@ -9,28 +9,26 @@
         
      <noscript><div><img src="https://mc.yandex.ru/watch/100430606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <script>
-    function getNextVersion() {
-        const pages = ["./roomsA.html", "./roomsB.html"];
-        
-        // Проверяем, есть ли уже сохраненная версия в localStorage
-        const savedVersion = localStorage.getItem("userVersion");
-        if (savedVersion) {
-            window.location.href = savedVersion;
-            return;
-        }
-        
-        // Получаем последнюю версию из sessionStorage (глобальное чередование)
-        let lastVersion = sessionStorage.getItem("lastVersion") || "B";
-        let nextVersion = lastVersion === "A" ? "B" : "A";
-        
-        // Сохраняем выбор для пользователя и обновляем глобальный флаг
-        let chosenPage = `./rooms${nextVersion}.html`;
-        localStorage.setItem("userVersion", chosenPage);
-        sessionStorage.setItem("lastVersion", nextVersion);
-        
-        // Перенаправляем пользователя
-        window.location.href = chosenPage;
+   function getRandomVersion() {
+    const pages = ["./roomsA.html", "./roomsB.html"];
+    
+    // Проверяем, есть ли уже сохраненная версия в localStorage
+    const savedVersion = localStorage.getItem("userVersion");
+    if (savedVersion) {
+        window.location.href = savedVersion;
+        return;
     }
+    
+    // Генерируем случайный индекс (0 или 1)
+    let randomIndex = Math.floor(Math.random() * pages.length);
+    let chosenPage = pages[randomIndex];
+    
+    // Сохраняем выбранную версию в localStorage
+    localStorage.setItem("userVersion", chosenPage);
+    
+    // Перенаправляем пользователя
+    window.location.href = chosenPage;
+}
     </script>
 </head>
 <body class="bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('./rooms/14.jpeg');">
